@@ -4,14 +4,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.UniqueElements;
+import org.springframework.lang.NonNull;
 
 @Entity
+@Table(name = "employee")
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	@NonNull
 	private String firstName;
 
 	private String lastName;
@@ -22,15 +28,8 @@ public class Employee {
 
 	private String mobileNumber;
 
-	public Employee(int id, String firstName, String lastName, String address, String emailId, String mobileNumber) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.emailId = emailId;
-		this.mobileNumber = mobileNumber;
-	}
+	@UniqueElements
+	private String username;
 
 	public Employee() {
 		super();
@@ -85,10 +84,30 @@ public class Employee {
 		this.mobileNumber = mobileNumber;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Employee(int id, String firstName, String lastName, String address, String emailId, String mobileNumber,
+			String username) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.emailId = emailId;
+		this.mobileNumber = mobileNumber;
+		this.username = username;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", emailId=" + emailId + ", mobileNumber=" + mobileNumber + "]";
+				+ ", emailId=" + emailId + ", mobileNumber=" + mobileNumber + ", username=" + username + "]";
 	}
 
 	@Override
@@ -101,6 +120,7 @@ public class Employee {
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -139,6 +159,11 @@ public class Employee {
 			if (other.mobileNumber != null)
 				return false;
 		} else if (!mobileNumber.equals(other.mobileNumber))
+			return false;
+		if (username == null) {
+			if (other.username != null)
+				return false;
+		} else if (!username.equals(other.username))
 			return false;
 		return true;
 	}

@@ -3,6 +3,7 @@ package com.restapi.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Employee;
 import com.restapi.service.EmployeeService;
+import com.sun.research.ws.wadl.Application;
 
 @RestController
 public class EmployeeController {
@@ -27,17 +29,17 @@ public class EmployeeController {
 		return "This is Home Page";
 	}
 
-	@GetMapping("/employees")
+	@GetMapping(path = "/employees")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
 
 		try {
 			List<Employee> allEmployee = service.getAllEmployee();
 
 			if (allEmployee.isEmpty()) {
-				return new ResponseEntity<>(allEmployee,HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(allEmployee, HttpStatus.NO_CONTENT);
 			}
 
-			return new ResponseEntity<>(allEmployee,HttpStatus.OK);
+			return new ResponseEntity<>(allEmployee, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
