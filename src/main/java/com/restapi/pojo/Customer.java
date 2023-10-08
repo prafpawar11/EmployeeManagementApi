@@ -1,23 +1,24 @@
 package com.restapi.pojo;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity
-@Table(name = "customer")
 public class Customer {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	private String Customer_name;
+	private String name;
 
-	private String customer_gender;
+	private String gender;
 
-	private String customer_state;
+	private String state;
 
-	private String customer_currentAddress;
+	private String caddress;
 
 	public int getId() {
 		return id;
@@ -27,52 +28,47 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getCustomer_name() {
-		return Customer_name;
+	public String getName() {
+		return name;
 	}
 
-	public void setCustomer_name(String customer_name) {
-		Customer_name = customer_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getCustomer_gender() {
-		return customer_gender;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setCustomer_gender(String customer_gender) {
-		this.customer_gender = customer_gender;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public String getCustomer_state() {
-		return customer_state;
+	public String getState() {
+		return state;
 	}
 
-	public void setCustomer_state(String customer_state) {
-		this.customer_state = customer_state;
+	public void setState(String state) {
+		this.state = state;
 	}
 
-	public String getCustomer_currentAddress() {
-		return customer_currentAddress;
+	public String getCaddress() {
+		return caddress;
 	}
 
-	public void setCustomer_currentAddress(String customer_currentAddress) {
-		this.customer_currentAddress = customer_currentAddress;
-	}
-
-	public Customer() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setCaddress(String caddress) {
+		this.caddress = caddress;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Customer_name == null) ? 0 : Customer_name.hashCode());
-		result = prime * result + ((customer_currentAddress == null) ? 0 : customer_currentAddress.hashCode());
-		result = prime * result + ((customer_gender == null) ? 0 : customer_gender.hashCode());
-		result = prime * result + ((customer_state == null) ? 0 : customer_state.hashCode());
+		result = prime * result + ((caddress == null) ? 0 : caddress.hashCode());
+		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((state == null) ? 0 : state.hashCode());
 		return result;
 	}
 
@@ -85,35 +81,35 @@ public class Customer {
 		if (getClass() != obj.getClass())
 			return false;
 		Customer other = (Customer) obj;
-		if (Customer_name == null) {
-			if (other.Customer_name != null)
+		if (caddress == null) {
+			if (other.caddress != null)
 				return false;
-		} else if (!Customer_name.equals(other.Customer_name))
+		} else if (!caddress.equals(other.caddress))
 			return false;
-		if (customer_currentAddress == null) {
-			if (other.customer_currentAddress != null)
+		if (gender == null) {
+			if (other.gender != null)
 				return false;
-		} else if (!customer_currentAddress.equals(other.customer_currentAddress))
-			return false;
-		if (customer_gender == null) {
-			if (other.customer_gender != null)
-				return false;
-		} else if (!customer_gender.equals(other.customer_gender))
-			return false;
-		if (customer_state == null) {
-			if (other.customer_state != null)
-				return false;
-		} else if (!customer_state.equals(other.customer_state))
+		} else if (!gender.equals(other.gender))
 			return false;
 		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (state == null) {
+			if (other.state != null)
+				return false;
+		} else if (!state.equals(other.state))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", Customer_name=" + Customer_name + ", customer_gender=" + customer_gender
-				+ ", customer_state=" + customer_state + ", customer_currentAddress=" + customer_currentAddress + "]";
+		return "Customer [id=" + id + ", name=" + name + ", gender=" + gender + ", state=" + state + ", caddress="
+				+ caddress + "]";
 	}
 
 }

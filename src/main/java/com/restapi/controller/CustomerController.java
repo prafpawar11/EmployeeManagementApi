@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Customer;
-import com.restapi.pojo.Employee;
 import com.restapi.service.CustomerService;
 
 @RestController
@@ -36,7 +36,7 @@ public class CustomerController {
 			List<Customer> allCustomer = service.getAllCustomers();
 
 			if (allCustomer.isEmpty()) {
-				return new ResponseEntity<>(allCustomer, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(allCustomer, HttpStatus.NOT_FOUND);
 			}
 
 			return new ResponseEntity<>(allCustomer, HttpStatus.OK);
@@ -58,29 +58,39 @@ public class CustomerController {
 		}
 	}
 
-	@PostMapping("/customers")
-	public ResponseEntity<Customer> createCustomer(@RequestBody Customer cust) {
-
-		try {
+	@PostMapping(path = "/customers", consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE })
+	public ResponseEntity<Customer> createCustomera(@RequestBody Customer cust) {
+		
+		try
+		{
+			System.out.println("11111111111111111111111111111111111111");
 			service.createCustomer(cust);
-
-			return new ResponseEntity<>(cust, HttpStatus.CREATED);
-		} catch (Exception e) {
+			
+			return new ResponseEntity<>(cust,HttpStatus.CREATED);
+		}
+		catch(Exception e)
+		{
+			
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+		
 	}
 
-	@PutMapping("/customers/{id}")
+	@PutMapping(path="/customers/{id}",consumes = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
+					MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @RequestBody Customer cust) {
 
 		Optional<Customer> cust1 = service.getCustomer(id);
 
 		if (cust1.isPresent()) {
 			Customer Oldcust = cust1.get();
-			Oldcust.setCustomer_name(cust.getCustomer_name());
-			Oldcust.setCustomer_gender(cust.getCustomer_gender());
-			Oldcust.setCustomer_state(cust.getCustomer_state());
-			Oldcust.setCustomer_currentAddress(cust.getCustomer_currentAddress());
+			Oldcust.setName(cust.getName());
+			Oldcust.setGender(cust.getGender());
+			Oldcust.setState(cust.getState());
+			Oldcust.setCaddress(cust.getCaddress());
 
 			service.updateCustomer(Oldcust);
 
@@ -96,8 +106,9 @@ public class CustomerController {
 		try {
 			service.deleteCustomer(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} catch (Exception e) {
-			return new ResponseEntity<HttpStatus>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} 
+		catch (Exception e) {
+			return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 		}
 
 	}

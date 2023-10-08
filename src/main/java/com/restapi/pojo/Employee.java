@@ -6,8 +6,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.UniqueElements;
-import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name = "employee")
@@ -17,24 +15,17 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NonNull
-	private String firstName;
+	private String firstname;
 
-	private String lastName;
+	private String lastname;
 
 	private String address;
 
-	private String emailId;
+	private String emailid;
 
-	private String mobileNumber;
+	private String mobilenumber;
 
-	@UniqueElements
 	private String username;
-
-	public Employee() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
 
 	public int getId() {
 		return id;
@@ -44,20 +35,20 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getFirstName() {
-		return firstName;
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getAddress() {
@@ -69,19 +60,19 @@ public class Employee {
 	}
 
 	public String getEmailId() {
-		return emailId;
+		return emailid;
 	}
 
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmailId(String emailid) {
+		this.emailid = emailid;
 	}
 
-	public String getMobileNumber() {
-		return mobileNumber;
+	public String getMobilenumber() {
+		return mobilenumber;
 	}
 
-	public void setMobileNumber(String mobileNumber) {
-		this.mobileNumber = mobileNumber;
+	public void setMobilenumber(String mobilenumber) {
+		this.mobilenumber = mobilenumber;
 	}
 
 	public String getUsername() {
@@ -92,22 +83,10 @@ public class Employee {
 		this.username = username;
 	}
 
-	public Employee(int id, String firstName, String lastName, String address, String emailId, String mobileNumber,
-			String username) {
-		super();
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.emailId = emailId;
-		this.mobileNumber = mobileNumber;
-		this.username = username;
-	}
-
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
-				+ ", emailId=" + emailId + ", mobileNumber=" + mobileNumber + ", username=" + username + "]";
+		return "Employee [id=" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", address=" + address
+				+ ", emailid=" + emailid + ", mobilenumber=" + mobilenumber + ", username=" + username + "]";
 	}
 
 	@Override
@@ -115,11 +94,11 @@ public class Employee {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
-		result = prime * result + ((emailId == null) ? 0 : emailId.hashCode());
-		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+		result = prime * result + ((emailid == null) ? 0 : emailid.hashCode());
+		result = prime * result + ((firstname == null) ? 0 : firstname.hashCode());
 		result = prime * result + id;
-		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-		result = prime * result + ((mobileNumber == null) ? 0 : mobileNumber.hashCode());
+		result = prime * result + ((lastname == null) ? 0 : lastname.hashCode());
+		result = prime * result + ((mobilenumber == null) ? 0 : mobilenumber.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
@@ -138,27 +117,27 @@ public class Employee {
 				return false;
 		} else if (!address.equals(other.address))
 			return false;
-		if (emailId == null) {
-			if (other.emailId != null)
+		if (emailid == null) {
+			if (other.emailid != null)
 				return false;
-		} else if (!emailId.equals(other.emailId))
+		} else if (!emailid.equals(other.emailid))
 			return false;
-		if (firstName == null) {
-			if (other.firstName != null)
+		if (firstname == null) {
+			if (other.firstname != null)
 				return false;
-		} else if (!firstName.equals(other.firstName))
+		} else if (!firstname.equals(other.firstname))
 			return false;
 		if (id != other.id)
 			return false;
-		if (lastName == null) {
-			if (other.lastName != null)
+		if (lastname == null) {
+			if (other.lastname != null)
 				return false;
-		} else if (!lastName.equals(other.lastName))
+		} else if (!lastname.equals(other.lastname))
 			return false;
-		if (mobileNumber == null) {
-			if (other.mobileNumber != null)
+		if (mobilenumber == null) {
+			if (other.mobilenumber != null)
 				return false;
-		} else if (!mobileNumber.equals(other.mobileNumber))
+		} else if (!mobilenumber.equals(other.mobilenumber))
 			return false;
 		if (username == null) {
 			if (other.username != null)
@@ -167,5 +146,8 @@ public class Employee {
 			return false;
 		return true;
 	}
+
+	
+	
 
 }
