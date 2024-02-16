@@ -19,12 +19,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restapi.pojo.Employee;
 import com.restapi.service.EmployeeService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/api/v2/")
 public class EmployeeController {
 	@Autowired
 	EmployeeService service;
 
+	@Operation(summary = "get All Employee Information")
 	@GetMapping(path = "/employees")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
 
@@ -41,7 +44,8 @@ public class EmployeeController {
 		}
 
 	}
-
+	
+	@Operation(summary = "get Employee Information by using Employee Id number")
 	@GetMapping(path = "/employees/{id}")
 	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
 
@@ -54,6 +58,7 @@ public class EmployeeController {
 		}
 	}
 
+	@Operation(summary = "create a new Employee")
 	@PostMapping(path = "/employees")
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp) {
 
@@ -66,6 +71,7 @@ public class EmployeeController {
 		}
 	}
 
+	@Operation(summary = "update Employee Information by using Employee Id number")
 	@PutMapping("/employees/{id}")
 	public ResponseEntity<Employee> updateEmployee(@PathVariable int id, @RequestBody Employee emp) {
 
@@ -85,6 +91,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Operation(summary = "update Employee Information by using Employee Id number")
 	@PatchMapping("/employees/{id}")
 	public ResponseEntity<Employee> updateSpecificEmployee(@PathVariable int id, @RequestBody Employee emp) {
 
@@ -118,6 +125,7 @@ public class EmployeeController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Operation(summary = "delete Employee Information by using Employee Id number")
 	@DeleteMapping("/employees/{id}")
 	public ResponseEntity<HttpStatus> deleteEmployee(@PathVariable int id) {
 		try {
