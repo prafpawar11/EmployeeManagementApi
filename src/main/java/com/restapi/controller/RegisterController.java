@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Employee;
@@ -20,15 +21,11 @@ import com.restapi.pojo.Register;
 import com.restapi.service.RegisterService;
 
 @RestController
+@RequestMapping("/api/v2/")
 public class RegisterController {
 
 	@Autowired
 	RegisterService service;
-
-	@GetMapping(path = "/")
-	public String getRegisterUserInfo() {
-		return "all user info";
-	}
 
 	@PostMapping(path = "/register", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,

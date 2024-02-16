@@ -5,28 +5,25 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Employee;
 import com.restapi.service.EmployeeService;
 
 @RestController
+@RequestMapping("/api/v2/")
 public class EmployeeController {
 	@Autowired
 	EmployeeService service;
-
-	@GetMapping
-	public String home() {
-		return "This is Home Page";
-	}
 
 	@GetMapping(path = "/employees")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
@@ -45,7 +42,7 @@ public class EmployeeController {
 
 	}
 
-	@GetMapping(path="/employees/{id}")
+	@GetMapping(path = "/employees/{id}")
 	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
 
 		Optional<Employee> emp1 = service.getEmployee(id);
@@ -57,7 +54,7 @@ public class EmployeeController {
 		}
 	}
 
-	@PostMapping(path="/employees")
+	@PostMapping(path = "/employees")
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp) {
 
 		try {
@@ -81,6 +78,37 @@ public class EmployeeController {
 			Oldemp.setAddress(emp.getAddress());
 			Oldemp.setEmailId(emp.getEmailId());
 			Oldemp.setMobilenumber(emp.getMobilenumber());
+			service.updateEmployee(Oldemp);
+			return new ResponseEntity<>(Oldemp, HttpStatus.OK);
+		}
+
+		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+
+	@PatchMapping("/employees/{id}")
+	public ResponseEntity<Employee> updateSpecificEmployee(@PathVariable int id, @RequestBody Employee emp) {
+
+		Optional<Employee> emp1 = service.getEmployee(id);
+
+		if (emp1.isPresent()) {
+			Employee Oldemp = emp1.get();
+
+			if (emp.getFirstname() != null) {
+				Oldemp.setFirstname(emp.getFirstname());
+			}
+			if (emp.getLastname() != null) {
+				Oldemp.setLastname(emp.getLastname());
+			}
+			if (emp.getAddress() != null) {
+				Oldemp.setAddress(emp.getAddress());
+			}
+			if (emp.getEmailId() != null) {
+				Oldemp.setEmailId(emp.getEmailId());
+			}
+			if (emp.getMobilenumber() != null) {
+				Oldemp.setMobilenumber(emp.getMobilenumber());
+			}
+
 			service.updateEmployee(Oldemp);
 
 			return new ResponseEntity<>(Oldemp, HttpStatus.OK);
