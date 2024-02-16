@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.restapi.pojo.Customer;
 import com.restapi.service.CustomerService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/api/v2/")
 public class CustomerController {
@@ -26,11 +28,13 @@ public class CustomerController {
 	@Autowired
 	CustomerService service;
 
+	@Operation(summary = "User is on Customer Page")
 	@GetMapping("/customer")
 	public String home() {
 		return "This is Customer Page";
 	}
 
+	@Operation(summary = "get All Customer Information")
 	@GetMapping(path = "/customers")
 	public ResponseEntity<List<Customer>> getAllCustomer() {
 
@@ -48,6 +52,7 @@ public class CustomerController {
 
 	}
 
+	@Operation(summary = "get Customer Information by using customer Id number")
 	@GetMapping("/customers/{id}")
 	public ResponseEntity<Customer> getCustomer(@PathVariable int id) {
 
@@ -60,6 +65,7 @@ public class CustomerController {
 		}
 	}
 
+	@Operation(summary = "create new Customer")
 	@PostMapping(path = "/customers", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
@@ -76,6 +82,7 @@ public class CustomerController {
 
 	}
 
+	@Operation(summary = "update Customer Information by using customer Id number")
 	@PutMapping(path = "/customers/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
@@ -99,6 +106,7 @@ public class CustomerController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Operation(summary = "delete Customer Information by using customer Id number")
 	@DeleteMapping("/customers/{id}")
 	public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable int id) {
 		try {

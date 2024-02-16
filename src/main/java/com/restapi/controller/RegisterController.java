@@ -20,13 +20,15 @@ import com.restapi.pojo.Employee;
 import com.restapi.pojo.Register;
 import com.restapi.service.RegisterService;
 
+import io.swagger.v3.oas.annotations.Operation;
+
 @RestController
 @RequestMapping("/api/v2/")
 public class RegisterController {
 
 	@Autowired
 	RegisterService service;
-
+	@Operation(summary = "register new user")
 	@PostMapping(path = "/register", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
@@ -40,7 +42,7 @@ public class RegisterController {
 		}
 
 	}
-
+	@Operation(summary = "get All user Information")
 	@GetMapping(path = "/allusers")
 	public ResponseEntity<List<Register>> getAllUsers() {
 		try {
@@ -53,6 +55,7 @@ public class RegisterController {
 
 	}
 
+	@Operation(summary = "get user Information by using user id number")
 	@GetMapping(path = "/getuser/{id}")
 	public ResponseEntity<Register> getUser(@PathVariable int id) {
 
@@ -67,6 +70,7 @@ public class RegisterController {
 
 	}
 
+	@Operation(summary = "update user Information by using user id number")
 	@PutMapping("/updateuser/{id}")
 	public ResponseEntity<Register> updateUser(@PathVariable int id, @RequestBody Register reg) {
 
@@ -82,6 +86,7 @@ public class RegisterController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	@Operation(summary = "delete user Information by using user id number")
 	@DeleteMapping("/deleteuser/{id}")
 	public ResponseEntity<HttpStatus> deleteUser(@PathVariable int id) {
 		try {
