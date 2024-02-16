@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Employee;
@@ -44,7 +45,7 @@ public class EmployeeController {
 		}
 
 	}
-	
+
 	@Operation(summary = "get Employee Information by using Employee Id number")
 	@GetMapping(path = "/employees/{id}")
 	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
@@ -56,6 +57,24 @@ public class EmployeeController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Operation(summary = "get All Employee Information by using Employee firstName")
+	@GetMapping(path = "/employee")
+	public ResponseEntity<List<Employee>> getEmployeeInfoUsingFirstName(@RequestParam String firstname) {
+
+		try {
+			List<Employee> allEmployee = service.getEmployeeUsingFirstName(firstname);
+
+			if (allEmployee.isEmpty()) {
+				return new ResponseEntity<>(allEmployee, HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity<>(allEmployee, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 	@Operation(summary = "create a new Employee")

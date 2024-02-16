@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.restapi.pojo.Customer;
+import com.restapi.pojo.Employee;
 import com.restapi.repository.CustomerRepository;
 
 @Service
@@ -20,6 +21,12 @@ public class CustomerService {
 		return repos.findAll();
 	}
 
+	public List<Customer> findAllCustomerUsingState(String state) {
+
+		List<Customer> cust = repos.findAllCustomerUsingState(state);		
+		return cust;
+	}
+	
 	public Optional<Customer> getCustomer(int id) {
 
 		Optional<Customer> cust = repos.findById(id);

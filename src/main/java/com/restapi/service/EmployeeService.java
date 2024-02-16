@@ -19,6 +19,12 @@ public class EmployeeService {
 		return repos.findAll();
 	}
 
+	public List<Employee> getEmployeeUsingFirstName(String firstName) {
+
+		List<Employee> emp = repos.findAllEmployeeUsingFirstName(firstName);		
+		return emp;
+	}
+
 	public Optional<Employee> getEmployee(int id) {
 
 		Optional<Employee> emp = repos.findById(id);
@@ -38,12 +44,9 @@ public class EmployeeService {
 
 		return repos.save(emp);
 	}
-	
-	public void deleteEmployee(int id)
-	{
+
+	public void deleteEmployee(int id) {
 		repos.deleteById(id);
 	}
-	
-	
 
 }

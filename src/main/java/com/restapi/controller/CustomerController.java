@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Customer;
+import com.restapi.pojo.Employee;
 import com.restapi.service.CustomerService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -63,6 +65,24 @@ public class CustomerController {
 		} else {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
+	}
+
+	@Operation(summary = "get All Customer Information by using customer state")
+	@GetMapping(path = "/customer}")
+	public ResponseEntity<List<Customer>> getCustomerInfoUsingState(@RequestParam String state) {
+
+		try {
+			List<Customer> allCustomer = service.findAllCustomerUsingState(state);
+
+			if (allCustomer.isEmpty()) {
+				return new ResponseEntity<>(allCustomer, HttpStatus.NO_CONTENT);
+			}
+
+			return new ResponseEntity<>(allCustomer, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
 	}
 
 	@Operation(summary = "create new Customer")
