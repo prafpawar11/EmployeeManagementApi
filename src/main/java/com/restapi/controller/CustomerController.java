@@ -13,12 +13,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.restapi.pojo.Customer;
 import com.restapi.service.CustomerService;
 
 @RestController
+@RequestMapping("/api/v2/")
 public class CustomerController {
 
 	@Autowired
@@ -62,23 +64,19 @@ public class CustomerController {
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Customer> createCustomera(@RequestBody Customer cust) {
-		
-		try
-		{
-			System.out.println("11111111111111111111111111111111111111");
+
+		try {
 			service.createCustomer(cust);
-			
-			return new ResponseEntity<>(cust,HttpStatus.CREATED);
-		}
-		catch(Exception e)
-		{
-			
+
+			return new ResponseEntity<>(cust, HttpStatus.CREATED);
+		} catch (Exception e) {
+
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
+
 	}
 
-	@PutMapping(path="/customers/{id}",consumes = { MediaType.APPLICATION_JSON_VALUE,
+	@PutMapping(path = "/customers/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Customer> updateCustomer(@PathVariable int id, @RequestBody Customer cust) {
@@ -106,8 +104,7 @@ public class CustomerController {
 		try {
 			service.deleteCustomer(id);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		} 
-		catch (Exception e) {
+		} catch (Exception e) {
 			return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 		}
 

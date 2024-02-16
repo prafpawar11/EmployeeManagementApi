@@ -16,6 +16,7 @@ public class CustomerService {
 	private CustomerRepository repos;
 
 	public List<Customer> getAllCustomers() {
+		
 		return repos.findAll();
 	}
 
@@ -30,7 +31,6 @@ public class CustomerService {
 	}
 
 	public Customer createCustomer(Customer cust) {
-		System.out.println("22222222222222222222222222222222");
 		repos.save(cust);
 		return cust;
 	}
