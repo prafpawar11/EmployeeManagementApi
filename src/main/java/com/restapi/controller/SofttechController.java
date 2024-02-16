@@ -15,6 +15,7 @@ public class SofttechController {
 		return "Hello";
 	}
 
+	
 	@GetMapping(path = "/course")
 	public String getData() {
 		return "API automation classes";
