@@ -31,7 +31,7 @@ public class CustomerController {
 	CustomerService service;
 
 	@Operation(summary = "User is on Customer Page")
-	@GetMapping("/customer")
+	@GetMapping("/")
 	public String home() {
 		return "This is Customer Page";
 	}

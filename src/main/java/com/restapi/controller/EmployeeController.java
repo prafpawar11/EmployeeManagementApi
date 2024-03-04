@@ -52,8 +52,7 @@ public class EmployeeController {
 
 		Optional<Employee> emp1 = service.getEmployee(id);
 		if (emp1.isPresent()) {
-			Employee emp = emp1.get();
-			return new ResponseEntity<>(emp, HttpStatus.OK);
+			return new ResponseEntity<>(emp1.get(), HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
