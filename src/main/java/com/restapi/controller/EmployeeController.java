@@ -27,7 +27,8 @@ import io.swagger.v3.oas.annotations.Operation;
 public class EmployeeController {
 	@Autowired
 	EmployeeService service;
-
+	static Employee Oldemp;
+	
 	@Operation(summary = "get All Employee Information")
 	@GetMapping(path = "/employees")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
@@ -96,7 +97,7 @@ public class EmployeeController {
 		Optional<Employee> emp1 = service.getEmployee(id);
 
 		if (emp1.isPresent()) {
-			Employee Oldemp = emp1.get();
+			Oldemp = emp1.get();
 			Oldemp.setFirstname(emp.getFirstname());
 			Oldemp.setLastname(emp.getLastname());
 			Oldemp.setAddress(emp.getAddress());
@@ -114,9 +115,10 @@ public class EmployeeController {
 	public ResponseEntity<Employee> updateSpecificEmployee(@PathVariable int id, @RequestBody Employee emp) {
 
 		Optional<Employee> emp1 = service.getEmployee(id);
-
-		if (emp1.isPresent()) {
-			Employee Oldemp = emp1.get();
+		
+		if (emp1.isPresent()) 
+		{
+			Oldemp = emp1.get();
 
 			if (emp.getFirstname() != null) {
 				Oldemp.setFirstname(emp.getFirstname());
