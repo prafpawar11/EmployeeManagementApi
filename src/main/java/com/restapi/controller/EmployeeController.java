@@ -28,8 +28,7 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService service;
 	static Employee Oldemp;
-	
-	
+
 	@Operation(summary = "get All Employee Information")
 	@GetMapping(path = "/employees")
 	public ResponseEntity<List<Employee>> getAllEmployee() {
@@ -52,12 +51,15 @@ public class EmployeeController {
 	@GetMapping(path = "/employees/{id}")
 	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
 
-		Optional<Employee> emp1 = service.getEmployee(id);
-		if (emp1.isPresent()) {
+		try {
+			Optional<Employee> emp1 = service.getEmployee(id);
+
 			return new ResponseEntity<>(emp1.get(), HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
+
 	}
 
 	@Operation(summary = "get All Employee Information by using Employee firstName")
@@ -116,9 +118,8 @@ public class EmployeeController {
 	public ResponseEntity<Employee> updateSpecificEmployee(@PathVariable int id, @RequestBody Employee emp) {
 
 		Optional<Employee> emp1 = service.getEmployee(id);
-		
-		if (emp1.isPresent()) 
-		{
+
+		if (emp1.isPresent()) {
 			Oldemp = emp1.get();
 
 			if (emp.getFirstname() != null) {

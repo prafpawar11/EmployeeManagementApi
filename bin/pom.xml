@@ -19,10 +19,28 @@
 	</properties>
 	<dependencies>
 
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
+		<!-- https://mvnrepository.com/artifact/io.springfox/springfox-boot-starter -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-boot-starter</artifactId>
+			<version>3.0.0</version>
+		</dependency>
+
+
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.28</version><!--$NO-MVN-MAN-VER$--> <!-- Use the appropriate version of MySQL Connector/J -->
+			<version>8.0.28</version><!--$NO-MVN-MAN-VER$ --> <!-- Use the appropriate version of MySQL Connector/J -->
 		</dependency>
 
 		<dependency>
@@ -51,7 +69,7 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>2.1.214</version><!--$NO-MVN-MAN-VER$-->
+			<version>2.1.214</version><!--$NO-MVN-MAN-VER$ -->
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -62,7 +80,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>5.3.17</version><!--$NO-MVN-MAN-VER$-->
+			<version>5.3.17</version><!--$NO-MVN-MAN-VER$ -->
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
