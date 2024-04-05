@@ -9,13 +9,13 @@
 <body>
 
 	<h2>
-		<a href="customer.html">Employee Functionality</a>
+		<a href="customer.jsp">Employee Functionality</a>
 	</h2>
 	<h2>
-		<a href="employee.html">Customer Functionality</a>
+		<a href="employee.jsp">Customer Functionality</a>
 	</h2>
 	<h2>
-		<a href="user.html">User Functionality</a>
+		<a href="user.jsp">User Functionality</a>
 	</h2>
 </body>
 </html>

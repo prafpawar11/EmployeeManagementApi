@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties.View;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -13,31 +14,34 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.restapi.pojo.Customer;
-import com.restapi.pojo.Employee;
 import com.restapi.service.CustomerService;
 
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/api/v2/")
+
 public class CustomerController {
 
 	@Autowired
 	CustomerService service;
 
 	@Operation(summary = "User is on Customer Page")
-	@GetMapping("/")
-	public String home() {
-		return "This is Customer Page";
+	@GetMapping(path = "/hello")
+	public ModelAndView home() {
+
+		ModelAndView m = new ModelAndView();
+		m.setViewName("index");
+		m.setViewName("customer");
+		return m;
 	}
 
-	@Operation(summary = "get All Customer Information")
-	@GetMapping(path = "/customers")
+	@Operation(summary = "Get All Customer Information")
+	@GetMapping(path = "/customers", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Customer>> getAllCustomer() {
 
 		try {
@@ -46,55 +50,51 @@ public class CustomerController {
 			if (allCustomer.isEmpty()) {
 				return new ResponseEntity<>(allCustomer, HttpStatus.NOT_FOUND);
 			}
-
 			return new ResponseEntity<>(allCustomer, HttpStatus.OK);
+
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
 	}
 
-	@Operation(summary = "get Customer Information by using customer Id number")
-	@GetMapping("/customers/{id}")
+	@Operation(summary = "Get Customer Information by using Customer Id Number")
+	@GetMapping(path = "/customers/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<Customer> getCustomer(@PathVariable int id) {
 
-		Optional<Customer> cust1 = service.getCustomer(id);
-		if (cust1.isPresent()) {
-			Customer cust = cust1.get();
-			return new ResponseEntity<>(cust, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+			return new ResponseEntity<>(service.getCustomer(id).get(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 
-	@Operation(summary = "get All Customer Information by using customer state")
-	@GetMapping(path = "/customer}")
+	@Operation(summary = "Get All Customer Information by using Customer State")
+	@GetMapping(path = "/customer}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<List<Customer>> getCustomerInfoUsingState(@RequestParam String state) {
 
 		try {
 			List<Customer> allCustomer = service.findAllCustomerUsingState(state);
 
 			if (allCustomer.isEmpty()) {
-				return new ResponseEntity<>(allCustomer, HttpStatus.NO_CONTENT);
+				return new ResponseEntity<>(allCustomer, HttpStatus.NOT_FOUND);
 			}
 
 			return new ResponseEntity<>(allCustomer, HttpStatus.OK);
 		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
 	}
 
-	@Operation(summary = "create new Customer")
+	@Operation(summary = "Create New Customer")
 	@PostMapping(path = "/customers", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Customer> createCustomera(@RequestBody Customer cust) {
 
 		try {
-			service.createCustomer(cust);
-
-			return new ResponseEntity<>(cust, HttpStatus.CREATED);
+			return new ResponseEntity<>(service.createCustomer(cust), HttpStatus.CREATED);
 		} catch (Exception e) {
 
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -102,7 +102,7 @@ public class CustomerController {
 
 	}
 
-	@Operation(summary = "update Customer Information by using customer Id number")
+	@Operation(summary = "Update Customer Information by using Customer Id Number")
 	@PutMapping(path = "/customers/{id}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
 					MediaType.APPLICATION_XML_VALUE })
@@ -126,8 +126,8 @@ public class CustomerController {
 		return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@Operation(summary = "delete Customer Information by using customer Id number")
-	@DeleteMapping("/customers/{id}")
+	@Operation(summary = "Delete Customer Information by using Customer Id Number")
+	@DeleteMapping(path = "/customers/{id}")
 	public ResponseEntity<HttpStatus> deleteCustomer(@PathVariable int id) {
 		try {
 			service.deleteCustomer(id);

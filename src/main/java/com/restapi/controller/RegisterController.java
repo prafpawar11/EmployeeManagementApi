@@ -28,6 +28,7 @@ public class RegisterController {
 
 	@Autowired
 	RegisterService service;
+
 	@Operation(summary = "register new user")
 	@PostMapping(path = "/register", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE }, produces = { MediaType.APPLICATION_JSON_VALUE,
@@ -42,12 +43,12 @@ public class RegisterController {
 		}
 
 	}
+
 	@Operation(summary = "get All user Information")
 	@GetMapping(path = "/allusers")
 	public ResponseEntity<List<Register>> getAllUsers() {
 		try {
 			List<Register> allusers = service.getAllUsers();
-
 			return new ResponseEntity<>(allusers, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -59,13 +60,10 @@ public class RegisterController {
 	@GetMapping(path = "/getuser/{id}")
 	public ResponseEntity<Register> getUser(@PathVariable int id) {
 
-		Optional<Register> user = service.getUser(id);
-
-		if (user.isPresent()) {
-			Register user1 = user.get();
-			return new ResponseEntity<>(user1, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		try {
+			return new ResponseEntity<>(service.getUser(id).get(), HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 
 	}

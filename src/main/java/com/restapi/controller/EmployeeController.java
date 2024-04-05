@@ -52,9 +52,7 @@ public class EmployeeController {
 	public ResponseEntity<Employee> getEmployee(@PathVariable int id) {
 
 		try {
-			Optional<Employee> emp1 = service.getEmployee(id);
-
-			return new ResponseEntity<>(emp1.get(), HttpStatus.OK);
+			return new ResponseEntity<>(service.getEmployee(id).get(), HttpStatus.OK);
 
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -85,9 +83,8 @@ public class EmployeeController {
 	public ResponseEntity<Employee> createEmployee(@RequestBody Employee emp) {
 
 		try {
-			service.createEmployee(emp);
 
-			return new ResponseEntity<>(emp, HttpStatus.CREATED);
+			return new ResponseEntity<>(service.createEmployee(emp), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
