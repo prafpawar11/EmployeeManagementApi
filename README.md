@@ -45,46 +45,46 @@ Query Parameter: <br>
 firstname:  {{firstname}<br>
 e.g.<br>
 	http://localhost:9191/api/v2/employee?firstName=Monika<br>
-<br><be>
+<br><br>
 <hr> <hr>
 
-<b>PUT Request is used to update whole employee information using employee ID number <b>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-PATH Parameter: {id}
-Content-Type: application/json
-Request Body:
-
-{
-  "address": "string",
-  "emailId": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "mobilenumber": "string",
-  "username": "string"
-}
-
+<b>PUT Request is used to update whole employee information using employee ID number <b><br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+PATH Parameter: {id}<br>
+Content-Type: application/json<br>
+Request Body:<br>
+{<br>
+  "address": "string",<br>
+  "emailId": "string",<br>
+  "firstname": "string",<br>
+  "lastname": "string",<br>
+  "mobilenumber": "string",<br>
+  "username": "string"<br>
+}<br><br>
+<hr> <hr>
 <b>PATCH Request is used to update partial employee information using employee ID number <b> <br>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-PATH Parameter: {id}
-Content-Type: application/json
-Request Body:
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+PATH Parameter: {id}<br>
+Content-Type: application/json<br>
+Request Body:<br>
+{<br>
+  "address": "string",<br>
+  "emailId": "string",<br>
+  "firstname": "string",<br>
+  "lastname": "string",<br>
+  "mobilenumber": "string",<br>
+  "username": "string"<br>
+}<br>
 
-{
-  "address": "string",
-  "emailId": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "mobilenumber": "string",
-  "username": "string"
-}
-<b> DELETE Request is used to delete the employee entity using employee ID number <b>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-PATH Parameter: {id}
-
-<hr>
+<hr> <hr>
+<b> DELETE Request is used to delete the employee entity using employee ID number <b><br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+PATH Parameter: {id}<br>
+<hr><br><be>
+	
 POST
 http://localhost:9191/api/v2/employees
 
