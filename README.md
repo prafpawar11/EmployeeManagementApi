@@ -4,22 +4,24 @@ and inside the MySql create an Amdocs database.
 We have different types of Resources as <b> Employee, Customer, and Register<b>
 
 In Employee Resource we have different Endpoints
- 
-<b> POST Request: It is used to create a new Entity in server <b>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-Content-Type	application/json
-Request Body:
-{
-  "address": "string",
-  "emailId": "string",
-  "firstname": "string",
-  "lastname": "string",
-  "mobilenumber": "string",
-  "username": "string"
-}
+ <hr>
+ <hr>
 
+<b> POST Request: It is used to create a new Entity in server <b><br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+Content-Type	application/json<br>
+Request Body:<br>
+{<br>
+  "address": "string",<br>
+  "emailId": "string",<br>
+  "firstname": "string",<br>
+  "lastname": "string",<br>
+  "mobilenumber": "string",<br>
+  "username": "string"<br>
+}<br>
 
+<hr>
 <b> GET Request	is used to get all employee information <b>
 
 BaseURI= http://localhost:9191
@@ -59,7 +61,7 @@ Request Body:
   "username": "string"
 }
 
-<b>PATCH Request is used to update partial employee information using employee ID number <b>
+<b>PATCH Request is used to update partial employee information using employee ID number <b> <br>
 BaseURI= http://localhost:9191
 Resource Name : /api/v2/employees
 PATH Parameter: {id}
