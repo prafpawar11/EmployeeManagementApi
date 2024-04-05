@@ -8,6 +8,7 @@ In Employee Resource we have different Endpoints
  <hr>
 
 <b> POST Request: It is used to create a new Entity in server <b><br>
+<br>
 BaseURI= http://localhost:9191<br>
 Resource Name : /api/v2/employees<br>
 Content-Type	application/json<br>
@@ -22,28 +23,30 @@ Request Body:<br>
 }<br>
 
 <hr>
-<b> GET Request	is used to get all employee information <b>
-
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-e.g.
-http://localhost:9191/api/v2/employees
-
-<b> GET Request	is used to get employee information using employee ID number<b>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employees
-PATH Parameter: {id}
-e.g.
-	http://localhost:9191/api/v2/employees/2
-
-<b> GET Request is used to get Employee by using first name <b>
-BaseURI= http://localhost:9191
-Resource Name : /api/v2/employee
-Query Parameter: 
-firstname:  {{firstname}
-e.g.
-	http://localhost:9191/api/v2/employee?firstName=Monika
-
+<hr>
+<b> GET Request	is used to get all employee information <b><br>
+<br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+e.g.<br>
+http://localhost:9191/api/v2/employees<br>
+<br><br>
+<b> GET Request	is used to get employee information using employee ID number<b><br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employees<br>
+PATH Parameter: {id}<br>
+e.g.<br>
+	http://localhost:9191/api/v2/employees/2<br>
+<br><br>
+<b> GET Request is used to get Employee by using first name <b><br>
+BaseURI= http://localhost:9191<br>
+Resource Name : /api/v2/employee<br>
+Query Parameter: <br>
+firstname:  {{firstname}<br>
+e.g.<br>
+	http://localhost:9191/api/v2/employee?firstName=Monika<br>
+<br><be>
+<hr> <hr>
 
 <b>PUT Request is used to update whole employee information using employee ID number <b>
 BaseURI= http://localhost:9191
